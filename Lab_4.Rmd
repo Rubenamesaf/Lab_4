@@ -1,0 +1,76 @@
+---
+title: "Análisis Exploratorio de Datos: mtcars"
+author: "Ruben MEsa"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: readable
+---
+
+# Introducción
+
+El objetivo de este documento es realizar un análisis exploratorio del conjunto de datos **mtcars**, disponible en R. Este análisis busca:
+
+1. **Explorar** las características del conjunto de datos mediante tablas y gráficos.
+2. **Identificar** relaciones entre variables relevantes.
+3. **Presentar** los hallazgos de manera organizada y visualmente atractiva.
+
+Este análisis estará dividido en secciones claramente organizadas, comenzando con una descripción de los datos, seguido de un análisis visual, y finalizando con conclusiones.
+
+# Análisis de Datos
+
+## Carga de Datos
+
+Cargamos el conjunto de datos `mtcars`:
+
+```{r}
+data(mtcars)
+mtcars_df <- as.data.frame(mtcars)
+head(mtcars_df)
+```
+
+## Tablas de Datos
+
+### Tabla Estática
+
+Presentamos las primeras filas del conjunto de datos utilizando la función `kable` de la librería **knitr**:
+
+```{r}
+library(knitr)
+kable(head(mtcars_df), caption = "Primeras filas del conjunto de datos mtcars.")
+```
+
+### Tabla Interactiva
+
+A continuación, presentamos una tabla interactiva usando la librería **DT**:
+
+```{r}
+library(DT)
+datatable(mtcars_df, options = list(pageLength = 5), caption = "Tabla interactiva del conjunto de datos mtcars.")
+```
+
+## Gráficos
+
+A continuación, generamos un gráfico de dispersión que muestra la relación entre el peso del vehículo (`wt`) y el consumo de millas por galón (`mpg`):
+
+```{r}
+library(ggplot2)
+ggplot(mtcars_df, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue", size = 3) +
+  labs(
+    title = "Relación entre el peso del vehículo y el consumo",
+    x = "Peso del vehículo (1000 lbs)",
+    y = "Consumo (mpg)"
+  ) +
+  theme_minimal()
+```
+
+# Conclusiones
+
+1. **Relación negativa**: Observamos una relación negativa entre el peso del vehículo y su consumo, es decir, a mayor peso, menor es la eficiencia en el consumo.
+2. **Variedad de datos**: El conjunto de datos contiene una diversidad de variables que pueden ser analizadas para obtener más información relevante.
+3. **Interactividad útil**: Las tablas interactivas facilitan la exploración detallada del conjunto de datos.
+
+Este análisis básico sirve como punto de partida para un análisis más profundo y específico según los objetivos de cada estudio.
